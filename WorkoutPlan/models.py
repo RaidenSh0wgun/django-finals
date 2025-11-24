@@ -47,15 +47,11 @@ class Exercise(models.Model):
     def __str__(self):
         return f"{self.name} ({self.sets} sets of {self.reps} reps)"
 
-    def calculate_calories_burned(self):
-        self.calories_burned = (self.sets * self.reps * 0.5)
-        return self.calories_burned
-
 class Location(models.Model):
     WorkoutPlan = models.ForeignKey(WorkoutPlan, on_delete=models.CASCADE, related_name='location_reports')
-    from_location = models.CharField(max_length=255, blank=True, null=True)
-    to_location = models.CharField(max_length=255, blank=True, null=True)
-    geolocation = models.CharField(max_length=50, blank=False, null=False, default='0,0')
+    from_location = models.CharField(max_length=200, blank=True, null=True)
+    to_location = models.CharField(max_length=200, blank=True, null=True)
+    Coordinates = models.CharField(max_length=50, blank=False, null=False, default='0,0')
 
     def __str__(self):
         try:
