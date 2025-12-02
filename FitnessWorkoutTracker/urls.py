@@ -17,21 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Goal.views import GoalListCreateView
-from User.views import (
-    UserListView,
-    UserProfileListCreateView,
-    UserSettingListCreateView
-)
-from WorkoutPlan.views import WorkoutPlanListCreateView
+from WorkoutPlan.views import WorkoutPlanListCreateView, WorkoutPlanDetailView, progressReportListCreateView, DistanceListCreateView, LocationListCreateView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/goals/', GoalListCreateView.as_view(), name='goal-list-create'),
-    path('api/users/', UserListView.as_view(), name='user-list'),
-    path('api/user-profiles/', UserProfileListCreateView.as_view(), name='user-profile-list-create'),
-    path('api/user-setting/', UserSettingListCreateView.as_view(), name='user-setting-list-create'),
+    path('api/progress-reports/', progressReportListCreateView.as_view(), name='progress-report-list-create'),
+    path('api/locations/', LocationListCreateView.as_view(), name='location-list-create'),
+    path('api/distances/', DistanceListCreateView.as_view(), name='distance-list-create'),
     path('api/workout-plans/', WorkoutPlanListCreateView.as_view(), name='workout-plan-list-create'),
     path('api/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

@@ -23,19 +23,10 @@ class Exercise(models.Model):
         ('Squat', 'Squat'),
         ('Lunges', 'Lunges'),
         ('Jumping Jacks', 'Jumping Jacks'),
-        ('high knees', 'high knees'),
-        ('Burpees', 'Burpees'),
+        ('High Knees', 'High Knees'),
         ('Mountain Climbers', 'Mountain Climbers'),
         ('Sit-ups', 'Sit-ups'),
         ('Leg Raises', 'Leg Raises'),
-        ('Bicycle Crunches', 'Bicycle Crunches'),
-        ('Russian Twists', 'Russian Twists'),
-        ('Tricep Dips', 'Tricep Dips'),
-        ('Wall Sit', 'Wall Sit'),
-        ('Calf Raises', 'Calf Raises'),
-        ('Glute Bridges', 'Glute Bridges'),
-        ('Donkey Kicks', 'Donkey Kicks'),
-        ('Fire Hydrants', 'Fire Hydrants'),
     ]
     
     Workout_list = models.CharField(max_length=50, choices=Workout_list_choices, null=True)
@@ -59,3 +50,22 @@ class Location(models.Model):
         except Exception:
             return "Location"
 
+class Distance(models.Model):
+    WorkoutPlan = models.ForeignKey(WorkoutPlan, on_delete=models.CASCADE, related_name='distance_reports')
+    distance_in_km = models.FloatField()
+
+    def __str__(self):
+        try:
+            return f"Distance for {self.WorkoutPlan.name}: {self.distance_in_km} km"
+        except Exception:
+            return "Distance"
+
+class progressReport(models.Model):
+    WorkoutPlan = models.ForeignKey(WorkoutPlan, on_delete=models.CASCADE, related_name='progress_reports')
+    progress_percentage = models.FloatField()
+
+    def __str__(self):
+        try:
+            return f"Progress for {self.WorkoutPlan.name}: {self.progress_percentage}%"
+        except Exception:
+            return "Progress Report"
