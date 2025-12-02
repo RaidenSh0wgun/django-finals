@@ -19,10 +19,13 @@ from django.urls import path
 from Goal.views import GoalListCreateView
 from WorkoutPlan.views import WorkoutPlanListCreateView, WorkoutPlanDetailView, progressReportListCreateView, DistanceListCreateView, LocationListCreateView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-
+from user.views import UserProfileView, UserProfileListView, LeaderboardView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/user-profile/', UserProfileView.as_view(), name='user-profile'),
+    path('api/user-profiles/', UserProfileListView.as_view(), name='user-profiles'),
+    path('api/leaderboard/', LeaderboardView.as_view(), name='leaderboard'),
     path('api/goals/', GoalListCreateView.as_view(), name='goal-list-create'),
     path('api/progress-reports/', progressReportListCreateView.as_view(), name='progress-report-list-create'),
     path('api/locations/', LocationListCreateView.as_view(), name='location-list-create'),
