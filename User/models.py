@@ -12,7 +12,7 @@ class UserProfile(models.Model):
         return f"{self.user.username}'s profile"
     
     
-class UserSettings(models.Model):
+class UserSetting(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE, related_name='settings')
     receive_newsletter = models.BooleanField(default=True)
     dark_mode = models.BooleanField(default=False)

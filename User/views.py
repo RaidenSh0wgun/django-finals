@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions, serializers
-from .serializer import UserProfileSerializer, UserSettingsSerializer, UserSerializer
-from .models import UserProfile, UserSettings
+from .serializer import UserProfileSerializer, UserSettingSerializer, UserSerializer
+from .models import UserProfile, UserSetting
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 
@@ -33,8 +33,8 @@ class UserProfileDetailView(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return UserProfile.objects.filter(user=self.request.user)
 
-class UserSettingsListCreateView(generics.ListCreateAPIView):
-    serializer_class = UserSettingsSerializer
+class UserSettingListCreateView(generics.ListCreateAPIView):
+    serializer_class = UserSettingSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
@@ -43,8 +43,8 @@ class UserSettingsListCreateView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-class UserSettingsDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = UserSettingsSerializer
+class UserSettingDetailView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = UserSettingSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):

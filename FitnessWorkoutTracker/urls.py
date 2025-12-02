@@ -20,7 +20,7 @@ from Goal.views import GoalListCreateView
 from User.views import (
     UserListView,
     UserProfileListCreateView,
-    UserSettingsListCreateView
+    UserSettingListCreateView
 )
 from WorkoutPlan.views import WorkoutPlanListCreateView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -31,7 +31,7 @@ urlpatterns = [
     path('api/goals/', GoalListCreateView.as_view(), name='goal-list-create'),
     path('api/users/', UserListView.as_view(), name='user-list'),
     path('api/user-profiles/', UserProfileListCreateView.as_view(), name='user-profile-list-create'),
-    path('api/user-settings/', UserSettingsListCreateView.as_view(), name='user-settings-list-create'),
+    path('api/user-setting/', UserSettingListCreateView.as_view(), name='user-setting-list-create'),
     path('api/workout-plans/', WorkoutPlanListCreateView.as_view(), name='workout-plan-list-create'),
     path('api/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
