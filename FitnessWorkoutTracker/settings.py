@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     'googlemaps',
     'django_filters',
-    'api',
 ]
 
 REST_FRAMEWORK = {

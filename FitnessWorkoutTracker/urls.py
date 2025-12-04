@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Goal.views import GoalListCreateView
-from WorkoutPlan.views import WorkoutPlanListCreateView, WorkoutPlanDetailView, progressReportListCreateView, DistanceListCreateView, LocationListCreateView
+from django.conf import settings
+from django.conf.urls.static import static
+from Goal.views import GoalListCreateView, GoalDetailView
+from WorkoutPlan.views import WorkoutPlanListCreateView, WorkoutPlanDetailView, ProgressReportListCreateView, DistanceListCreateView, LocationListCreateView, CompletedExerciseCreateView, CompletedExerciseListView, ExerciseListCreateView, ExerciseDetailView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from user.views import UserProfileView, UserProfileListView, LeaderboardView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,11 +30,21 @@ urlpatterns = [
     path('api/user-profiles/', UserProfileListView.as_view(), name='user-profiles'),
     path('api/leaderboard/', LeaderboardView.as_view(), name='leaderboard'),
     path('api/goals/', GoalListCreateView.as_view(), name='goal-list-create'),
-    path('api/progress-reports/', progressReportListCreateView.as_view(), name='progress-report-list-create'),
+    path('api/goals-detail/', GoalDetailView.as_view(), name='goal-detail'),
+    path('api/progress-reports/', ProgressReportListCreateView.as_view(), name='progress-report-list-create'),
+    path('api/completed-exercises/', CompletedExerciseCreateView.as_view(), name='completed-exercise-create'),
+    path('api/completed-exercises/list/', CompletedExerciseListView.as_view(), name='completed-exercise-list'),
     path('api/locations/', LocationListCreateView.as_view(), name='location-list-create'),
     path('api/distances/', DistanceListCreateView.as_view(), name='distance-list-create'),
     path('api/workout-plans/', WorkoutPlanListCreateView.as_view(), name='workout-plan-list-create'),
+    path('api/workout-plans-details/', WorkoutPlanDetailView.as_view(), name='workout-plan-detail'),
+    path('api/exercises/', ExerciseListCreateView.as_view(), name='exercise-list-create'),
+    path('api/exercises-detail/', ExerciseDetailView.as_view(), name='exercise-detail'),
     path('api/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

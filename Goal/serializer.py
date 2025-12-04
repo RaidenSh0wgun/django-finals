@@ -6,8 +6,3 @@ class GoalSerializer(serializers.ModelSerializer):
         model = Goal
         fields = '__all__'
         read_only_fields = ('user',)
-
-class NoteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Goal
-        fields = '__all__'

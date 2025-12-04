@@ -1,15 +1,15 @@
-from django.shortcuts import render
 from rest_framework import generics, permissions
 from .models import UserProfile, leaderboard
 from .serializer import UserProfileSerializer, LeaderboardSerializer
 # Create your views here.
 
-class UserProfileView(generics.ListCreateAPIView, generics.RetrieveUpdateAPIView):
+class UserProfileView(generics.RetrieveUpdateAPIView):
     serializer_class = UserProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self):
-        return UserProfile.objects.get(user=self.request.user)
+        profile, created = UserProfile.objects.get_or_create(user=self.request.user)
+        return profile
 
 class UserProfileListView(generics.ListAPIView):
     queryset = UserProfile.objects.all()
